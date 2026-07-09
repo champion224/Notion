@@ -2,61 +2,7 @@
 <head>
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'><link rel="stylesheet" href="./style.css">
 <style>
-// insert the css from the codepen here
-</style>
-</head>
-<body>
-// insert the html code from the codepen here
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script>
-  <div id="player-bg-artwork"></div>
-<div id="player-bg-layer"></div>
-<div id="player-container">
-  <div id="player">
-    <div id="player-track">
-      <div id="album-name"></div>
-      <div id="track-name"></div>
-      <div id="track-time">
-        <div id="current-time"></div>
-        <div id="track-length"></div>
-      </div>
-      <div id="seek-bar-container">
-        <div id="seek-time"></div>
-        <div id="s-hover"></div>
-        <div id="seek-bar"></div>
-      </div>
-    </div>
-    <div id="player-content">
-      <div id="album-art">
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/1.jpg" class="active" id="_1" />
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/2.jpg" id="_2" />
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/3.jpg" id="_3" />
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/4.jpg" id="_4" />
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/5.jpg" id="_5" />
-        <div id="buffer-box">Buffering ...</div>
-      </div>
-      <div id="player-controls">
-        <div class="control">
-          <div class="button" id="play-previous">
-            <i class="fas fa-backward"></i>
-          </div>
-        </div>
-        <div class="control">
-          <div class="button" id="play-pause-button">
-            <i class="fas fa-play"></i>
-          </div>
-        </div>
-        <div class="control">
-          <div class="button" id="play-next">
-            <i class="fas fa-forward"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
- {
+  * {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   user-select: none;
@@ -377,9 +323,60 @@ body {
 .button:hover i {
   color: #fff;
 }
+</style>
+</head>
+<body>
+  <div id="player-bg-artwork"></div>
+<div id="player-bg-layer"></div>
+<div id="player-container">
+  <div id="player">
+    <div id="player-track">
+      <div id="album-name"></div>
+      <div id="track-name"></div>
+      <div id="track-time">
+        <div id="current-time"></div>
+        <div id="track-length"></div>
+      </div>
+      <div id="seek-bar-container">
+        <div id="seek-time"></div>
+        <div id="s-hover"></div>
+        <div id="seek-bar"></div>
+      </div>
+    </div>
+    <div id="player-content">
+      <div id="album-art">
+        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/1.jpg" class="active" id="_1" />
+        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/2.jpg" id="_2" />
+        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/3.jpg" id="_3" />
+        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/4.jpg" id="_4" />
+        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/5.jpg" id="_5" />
+        <div id="buffer-box">Buffering ...</div>
+      </div>
+      <div id="player-controls">
+        <div class="control">
+          <div class="button" id="play-previous">
+            <i class="fas fa-backward"></i>
+          </div>
+        </div>
+        <div class="control">
+          <div class="button" id="play-pause-button">
+            <i class="fas fa-play"></i>
+          </div>
+        </div>
+        <div class="control">
+          <div class="button" id="play-next">
+            <i class="fas fa-forward"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-$(function () {
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+  $(function () {
   const playerTrack = $("#player-track");
   const bgArtwork = $("#player-bg-artwork");
   const albumName = $("#album-name");
@@ -633,8 +630,6 @@ $(function () {
 
   initPlayer();
 });
-
-
 </script>
 </body>
 </html>

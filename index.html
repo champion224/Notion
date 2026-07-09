@@ -8,7 +8,7 @@
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
- 
+
 
 *:focus {
   outline: none;
@@ -421,6 +421,9 @@ body {
         checkBuffering();
         i.attr("class", "fas fa-pause");
         audio.play();
+        audio.addEventListener('ended', function() {
+document.getElementById("play-next").click();
+}, false);
       } else {
         playerTrack.removeClass("active");
         albumArt.removeClass("active");

@@ -9,6 +9,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+
 *:focus {
   outline: none;
 }
@@ -323,11 +324,11 @@ body {
     </div>
     <div id="player-content">
       <div id="album-art">
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/1.jpg" class="active" id="_1" />
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/2.jpg" id="_2" />
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/3.jpg" id="_3" />
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/4.jpg" id="_4" />
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/5.jpg" id="_5" />
+        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20140307_37%2Fqkddnf2017_1394178637261CQzkb_GIF%2Ftumblr_mabdlpl8sv1raym3wo1_r1_500.gif&type=a340" class="active" id="_1" />
+        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDAxMjRfMjg3%2FMDAxNzA2MDk0ODQ3ODA3.BzQCS7jbsNj7mDKL6DK48aV4qPw22livaRvsJkFhgDcg.o176K5jXR8gNGlehpfRc9GUAXsM71lkfhLszA1KmQ3Ig.JPEG.yuneee15%2F6.jpg&type=l340_165" id="_2" />
+        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MTVfMTMg%2FMDAxNjIzNzI3MDAyNzE1.VoBfQes-iWRUGMA4kxL92Cgclte6ZHmALftOYu8XNNcg.DFnB9-k_9whwGeBJN4QoirgNuuKyATMuS7BdglofqvAg.GIF.ohpal5858%2FIMG_2080.GIF&type=a340" id="_3" />
+        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5486%2F2021%2F11%2F04%2F0000190376_002_20211104134803816.jpg&type=a340" id="_4" />
+        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA2MTRfMzMg%2FMDAxNTYwNTA3NTMxNzUy.39cuV7v6MWHSMiuXELEgJMKQV5IrSL1gIJOtZBpn-W0g.Qn3U9162hzFgofa4_8FizApm4zbAdDDI6xXcZ9U9OEog.JPEG.clickartyun%2FIMG_7094.jpg&type=a340" id="_5" />
         <div id="buffer-box">Buffering ...</div>
       </div>
       <div id="player-controls">
@@ -386,11 +387,11 @@ body {
   ];
   const albumArtworks = ["_1", "_2", "_3", "_4", "_5"];
   const trackUrl = [
-    "https://singhimalaya.github.io/Codepen/assets/music/1.mp3",
-    "https://singhimalaya.github.io/Codepen/assets/music/2.mp3",
-    "https://singhimalaya.github.io/Codepen/assets/music/3.mp3",
-    "https://singhimalaya.github.io/Codepen/assets/music/4.mp3",
-    "https://singhimalaya.github.io/Codepen/assets/music/5.mp3"
+    "https://champion224.github.io/Notion/alex-morgan-fantasy-adventure-quest-537478.mp3",
+    "https://champion224.github.io/Notion/kaazoom-mist-over-the-old-stones-medieval-fantasy-music-500720.mp3",
+    "https://champion224.github.io/Notion/kaazoom-under-the-elven-star-fantasy-rpg-music-447854.mp3",
+    "https://champion224.github.io/Notion/rubyzephyr-fantasy-rpg-exploration-v2-461303.mp3",
+    "https://champion224.github.io/Notion/rubyzephyr-fantasy-rpg-exploration-v2-461303.mp3"
   ];
 
   let bgArtworkUrl,
@@ -536,7 +537,15 @@ document.getElementById("play-next").click();
   function selectTrack(flag) {
     if (flag == 0 || flag == 1) ++currIndex;
     else --currIndex;
+    
+    if (currIndex >= albumArtworks.length) {
+      currIndex = 0;
+    }
 
+    if (currIndex < 0) {
+      currIndex = albumArtworks.length - 1;
+    }
+    
     if (currIndex > -1 && currIndex < albumArtworks.length) {
       if (flag == 0) i.attr("class", "fa fa-play");
       else {

@@ -429,7 +429,22 @@ button:hover{
     background:#fff;
 
 }
+.timer{
+    user-select:none;
+}
 
+
+}
+
+.move-area{
+
+    position:absolute;
+
+    width:540px;
+
+    height:740px;
+
+    cursor:grab;
 
 }
 
@@ -441,6 +456,7 @@ button:hover{
 <body>
 
 
+<div class="move-area"></div>
 <div class="timer">
 
 
@@ -488,8 +504,65 @@ const handle=document.querySelector(".handle");
 
 const timeDisplay=document.querySelector(".time-display");
 
-
 const center=250;
+
+
+/* 종료 알람 */
+
+function playAlarm(){
+
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+
+    function beep(delay){
+
+        setTimeout(()=>{
+
+            const osc = ctx.createOscillator();
+
+            const gain = ctx.createGain();
+
+
+            osc.type="sine";
+
+            osc.frequency.value=880;
+
+
+            gain.gain.value=0.3;
+
+
+            osc.connect(gain);
+
+            gain.connect(ctx.destination);
+
+
+            osc.start();
+
+
+            setTimeout(()=>{
+
+                osc.stop();
+
+            },300);
+
+
+        },delay);
+
+    }
+
+
+    beep(0);       // 1번째 삐
+    beep(500);     // 2번째 삐
+    beep(1000);    // 3번째 삐
+
+
+    setTimeout(()=>{
+
+        ctx.close();
+
+    },1500);
+
+}
 
 
 
@@ -630,11 +703,15 @@ function startTimer(){
 
         if(remainingSeconds<=0){
 
-            clearInterval(timerInterval);
+        clearInterval(timerInterval);
 
-            timerInterval=null;
+        timerInterval=null;
 
-            return;
+
+        playAlarm();
+
+
+        return;
 
         }
 
@@ -802,20 +879,35 @@ resizeHandle.addEventListener("mousedown",(e)=>{
 
 
 
-timer.addEventListener("mousedown",(e)=>{
+document.querySelector(".move-area").addEventListener("mousedown",(e)=>{
 
-
+    // 크기 조절 점 제외
     if(e.target===resizeHandle) return;
 
 
+    // 손잡이 제외
     if(e.target===handle) return;
+
+
+    // 버튼 제외
+    if(e.target.tagName==="BUTTON") return;
+
+
+    // 원판/숫자/눈금 제외
+    if(
+        e.target.classList.contains("dial") ||
+        e.target.classList.contains("tick") ||
+        e.target.classList.contains("number") ||
+        e.target.classList.contains("hand")
+    ){
+        return;
+    }
 
 
     moving=true;
 
 
     moveStartX=e.clientX-posX;
-
 
     moveStartY=e.clientY-posY;
 

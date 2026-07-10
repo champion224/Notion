@@ -516,14 +516,10 @@ const center=250;
 function playAlarm(){
 
 
-    if(!audioCtx){
-
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-    }
+    if(!audioCtx) return;
 
 
-    function beep(delay){
+    for(let i=0;i<10;i++){
 
 
         setTimeout(()=>{
@@ -539,7 +535,10 @@ function playAlarm(){
             osc.frequency.value=880;
 
 
-            gain.gain.value=0.35;
+            gain.gain.setValueAtTime(
+                0.3,
+                audioCtx.currentTime
+            );
 
 
             osc.connect(gain);
@@ -550,32 +549,18 @@ function playAlarm(){
             osc.start();
 
 
-            setTimeout(()=>{
-
-                osc.stop();
-
-            },250);
+            osc.stop(
+                audioCtx.currentTime + 0.25
+            );
 
 
+        }, i * 400);
 
-        },delay);
-
-
-    }
-
-
-
-    // 삐삐삐 10번
-
-    for(let i=0;i<10;i++){
-
-        beep(i*400);
 
     }
 
 
 }
-
 
 for(let i=0;i<60;i++){
 
@@ -722,9 +707,16 @@ function startTimer(){
 
     if(audioCtx.state==="suspended"){
 
-        audioCtx.resume();
+    audioCtx.resume();
 
-    }
+}
+
+
+// 아이폰 오디오 테스트용
+const silentOsc = audioCtx.createOscillator();
+silentOsc.connect(audioCtx.destination);
+silentOsc.start();
+silentOsc.stop(audioCtx.currentTime + 0.01);
 
 
     timerInterval=setInterval(()=>{

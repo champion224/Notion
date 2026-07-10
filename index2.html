@@ -766,14 +766,62 @@ function resetTimer(){
 
 /* 손잡이 드래그 */
 
+/* 손잡이 터치 + 마우스 드래그 */
+
 let dragging=false;
 
 
-handle.addEventListener("mousedown",()=>{
+function moveHandle(clientX,clientY){
+
+    const rect=timer.getBoundingClientRect();
+
+
+    const x=clientX-(rect.left+250*0.65);
+
+    const y=clientY-(rect.top+250*0.65);
+
+
+    let angle=Math.atan2(x,-y)*180/Math.PI;
+
+
+    if(angle<0) angle+=360;
+
+
+    angle=Math.round(angle/6)*6;
+
+
+    selectedSeconds=angle*10;
+
+    remainingSeconds=selectedSeconds;
+
+
+    setTimer(angle);
+
+    updateDisplay();
+
+}
+
+
+
+/* PC */
+
+handle.addEventListener("mousedown",(e)=>{
 
     if(timerInterval)return;
 
     dragging=true;
+
+    e.preventDefault();
+
+});
+
+
+
+document.addEventListener("mousemove",(e)=>{
+
+    if(!dragging)return;
+
+    moveHandle(e.clientX,e.clientY);
 
 });
 
@@ -787,40 +835,43 @@ document.addEventListener("mouseup",()=>{
 
 
 
-document.addEventListener("mousemove",(e)=>{
 
+
+/* 모바일 / 아이패드 */
+
+handle.addEventListener("touchstart",(e)=>{
+
+    if(timerInterval)return;
+
+    dragging=true;
+
+    e.preventDefault();
+
+},{passive:false});
+
+
+
+document.addEventListener("touchmove",(e)=>{
 
     if(!dragging)return;
 
 
-    const rect=timer.getBoundingClientRect();
+    const touch=e.touches[0];
 
 
-    const x=e.clientX-(rect.left+250*0.65);
-
-    const y=e.clientY-(rect.top+250*0.65);
-
-
-    let angle=Math.atan2(x,-y)*180/Math.PI;
+    moveHandle(
+        touch.clientX,
+        touch.clientY
+    );
 
 
-    if(angle<0)angle+=360;
+},{passive:false});
 
 
-    angle=Math.round(angle/6)*6;
 
+document.addEventListener("touchend",()=>{
 
-    selectedSeconds=angle*10;
-
-
-    remainingSeconds=selectedSeconds;
-
-
-    setTimer(angle);
-
-
-    updateDisplay();
-
+    dragging=false;
 
 });
 

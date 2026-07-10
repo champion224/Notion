@@ -515,29 +515,36 @@ const center=250;
 
 function playAlarm(){
 
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+    if(!audioCtx){
+
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    }
 
 
     function beep(delay){
 
+
         setTimeout(()=>{
 
-            const osc = ctx.createOscillator();
 
-            const gain = ctx.createGain();
+            const osc = audioCtx.createOscillator();
+
+            const gain = audioCtx.createGain();
 
 
-            osc.type="sine";
+            osc.type="square";
 
             osc.frequency.value=880;
 
 
-            gain.gain.value=0.3;
+            gain.gain.value=0.35;
 
 
             osc.connect(gain);
 
-            gain.connect(ctx.destination);
+            gain.connect(audioCtx.destination);
 
 
             osc.start();
@@ -550,12 +557,16 @@ function playAlarm(){
             },250);
 
 
+
         },delay);
+
 
     }
 
 
-    // 삐 소리 10번
+
+    // 삐삐삐 10번
+
     for(let i=0;i<10;i++){
 
         beep(i*400);
@@ -563,14 +574,7 @@ function playAlarm(){
     }
 
 
-    setTimeout(()=>{
-
-        ctx.close();
-
-    },4500);
-
 }
-
 
 
 for(let i=0;i<60;i++){
@@ -640,6 +644,9 @@ let remainingSeconds=3600;
 
 let timerInterval=null;
 
+// 아이폰 오디오용
+let audioCtx=null;
+
 
 function updateDisplay(){
 
@@ -703,6 +710,21 @@ function setTimer(angle){
 function startTimer(){
 
     if(timerInterval)return;
+
+
+    // 아이폰 오디오 권한 활성화
+    if(!audioCtx){
+
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    }
+
+
+    if(audioCtx.state==="suspended"){
+
+        audioCtx.resume();
+
+    }
 
 
     timerInterval=setInterval(()=>{
@@ -878,13 +900,111 @@ document.addEventListener("touchmove",(e)=>{
 
 
 
-document.addEventListener("touchend",()=>{
+/* =========================
+   원판 터치 시간 설정 (아이폰)
+========================= */
 
-    dragging=false;
+
+function setFromPosition(clientX, clientY){
+
+    const rect = timer.getBoundingClientRect();
+
+
+    // scale 0.65 적용 보정
+    const x = clientX - (rect.left + 250 * 0.65);
+    const y = clientY - (rect.top + 250 * 0.65);
+
+
+    let angle = Math.atan2(x, -y) * 180 / Math.PI;
+
+
+    if(angle < 0){
+        angle += 360;
+    }
+
+
+    // 5분 단위 눈금
+    angle = Math.round(angle / 30) * 30;
+
+
+    selectedSeconds = angle * 10;
+
+    remainingSeconds = selectedSeconds;
+
+
+    setTimer(angle);
+
+    updateDisplay();
+
+}
+
+
+
+/* 아이폰 터치 */
+
+timer.addEventListener("touchstart",(e)=>{
+
+
+    if(timerInterval) return;
+
+
+    const target=e.target;
+
+
+    // 버튼 터치 제외
+    if(target.tagName==="BUTTON"){
+        return;
+    }
+
+
+    // 크기 조절점 제외
+    if(target.classList.contains("resize-handle")){
+        return;
+    }
+
+
+    const touch=e.touches[0];
+
+
+    setFromPosition(
+        touch.clientX,
+        touch.clientY
+    );
+
+
+    e.preventDefault();
+
+
+},{passive:false});
+
+
+
+
+/* PC 클릭 */
+
+timer.addEventListener("mousedown",(e)=>{
+
+
+    if(timerInterval) return;
+
+
+    if(e.target.tagName==="BUTTON"){
+        return;
+    }
+
+
+    if(e.target.classList.contains("resize-handle")){
+        return;
+    }
+
+
+    setFromPosition(
+        e.clientX,
+        e.clientY
+    );
+
 
 });
-
-
 
 
 

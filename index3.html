@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculator</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+
+body{
+
+    margin:0;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#ffffff;
+
+    font-family:
+    "Pretendard",
+    "Apple SD Gothic Neo",
+    sans-serif;
+
+}
+
+
+/* 계산기 카드 */
+
+.calculator{
+
+    width:330px;
+
+    padding:26px;
+
+    border-radius:38px;
+
+    background:#ffffff;
+
+
+    /* 회색 테두리 추가 */
+    border:1px solid #e5e5e5;
+
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,0.06),
+
+    inset 0 0 0 1px rgba(255,255,255,0.8);
+
+}
+
+
+/* 기록 */
+
+.history{
+
+    height:25px;
+
+    text-align:right;
+
+    color:#b0b0b0;
+
+    font-size:14px;
+
+    letter-spacing:.5px;
+
+}
+
+
+
+/* 숫자 표시 */
+
+.display{
+
+    height:90px;
+
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+
+    font-family:
+    "SF Pro Display",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+
+    font-size:56px;
+
+    font-weight:500;
+
+    letter-spacing:-2px;
+
+    color:#111;
+
+
+    overflow:hidden;
+
+}
+
+
+
+/* 버튼 영역 */
+
+.buttons{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:13px;
+
+}
+
+
+
+button{
+
+
+    height:60px;
+
+    border:none;
+
+    border-radius:20px;
+
+
+    background:#f7f7f7;
+
+
+    color:#222;
+
+
+    font-size:22px;
+
+    font-weight:400;
+
+
+    cursor:pointer;
+
+
+    transition:.15s;
+
+
+}
+
+
+
+button:hover{
+
+    background:#eeeeee;
+
+}
+
+
+button:active{
+
+    transform:scale(.92);
+
+}
+
+
+
+
+/* 연산 버튼 */
+
+.operator{
+
+
+    background:#222222;
+
+    color:white;
+
+
+}
+
+
+
+.operator:hover{
+
+    background:#333;
+
+}
+
+
+
+/* 초기화 */
+
+.clear{
+
+    background:#eaeaea;
+
+    color:#555;
+
+}
+
+
+
+
+/* 0 버튼 */
+
+.zero{
+
+    grid-column:span 2;
+
+    text-align:left;
+
+    padding-left:25px;
+
+}
+
+
+
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="calculator">
+
+
+<div class="history" id="history"></div>
+
+
+<div class="display" id="display">
+0
+</div>
+
+
+
+<div class="buttons">
+
+
+<button class="clear" onclick="clearAll()">AC</button>
+<button onclick="append('(')">(</button>
+<button onclick="append(')')">)</button>
+<button class="operator" onclick="append('/')">÷</button>
+
+
+<button onclick="append('7')">7</button>
+<button onclick="append('8')">8</button>
+<button onclick="append('9')">9</button>
+<button class="operator" onclick="append('*')">×</button>
+
+
+<button onclick="append('4')">4</button>
+<button onclick="append('5')">5</button>
+<button onclick="append('6')">6</button>
+<button class="operator" onclick="append('-')">−</button>
+
+
+<button onclick="append('1')">1</button>
+<button onclick="append('2')">2</button>
+<button onclick="append('3')">3</button>
+<button class="operator" onclick="append('+')">+</button>
+
+
+<button class="zero" onclick="append('0')">
+0
+</button>
+
+<button onclick="append('.')">
+.
+</button>
+
+<button class="operator" onclick="calculate()">
+=
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<script>
+
+
+let expression="";
+
+
+const display=document.getElementById("display");
+const history=document.getElementById("history");
+
+
+
+function append(value){
+
+    expression += value;
+
+    display.innerText=formatNumber(expression);
+
+}
+
+
+function clearAll(){
+
+    expression="";
+
+    display.innerText="0";
+
+    history.innerText="";
+
+}
+
+
+
+function calculate(){
+
+
+try{
+
+
+let result=Function(
+"return "+expression
+)();
+
+
+
+history.innerText=
+expression;
+
+
+
+expression=result;
+
+
+display.innerText=result;
+
+
+}
+
+catch{
+
+
+display.innerText="Error";
+
+expression="";
+
+
+}
+
+
+
+}
+
+
+
+document.addEventListener("keydown",e=>{
+
+
+if(
+(e.key>="0"&&e.key<="9")
+|| "+-*/().".includes(e.key)
+){
+
+append(e.key);
+
+}
+
+
+if(e.key==="Enter")
+calculate();
+
+
+
+if(e.key==="Escape")
+clearAll();
+
+
+
+});
+
+function formatNumber(value){
+
+    if(value === "") return "0";
+
+    // 계산식(+, -, *, / 등)이 있으면 그대로 표시
+    if(/[+\-*/().]/.test(value)){
+        return value;
+    }
+
+    let num = Number(value);
+
+    if(isNaN(num)){
+        return value;
+    }
+
+    return num.toLocaleString("ko-KR");
+
+}
+
+</script>
+
+
+</body>
+</html>

@@ -24,6 +24,8 @@ body{
     width:500px;
     height:700px;
 
+    z-index:10;
+
     transform:translate(0px,0px) scale(0.65);
 
     transform-origin:center center;
@@ -446,6 +448,8 @@ button:hover{
 
     cursor:grab;
 
+    z-index:0;
+
 }
 
 
@@ -543,7 +547,7 @@ function playAlarm(){
 
                 osc.stop();
 
-            },300);
+            },250);
 
 
         },delay);
@@ -551,16 +555,19 @@ function playAlarm(){
     }
 
 
-    beep(0);       // 1번째 삐
-    beep(500);     // 2번째 삐
-    beep(1000);    // 3번째 삐
+    // 삐 소리 10번
+    for(let i=0;i<10;i++){
+
+        beep(i*400);
+
+    }
 
 
     setTimeout(()=>{
 
         ctx.close();
 
-    },1500);
+    },4500);
 
 }
 
@@ -843,6 +850,8 @@ handle.addEventListener("touchstart",(e)=>{
 
     if(timerInterval)return;
 
+    e.stopPropagation();
+
     dragging=true;
 
     e.preventDefault();
@@ -931,6 +940,70 @@ resizeHandle.addEventListener("mousedown",(e)=>{
 
 
 document.querySelector(".move-area").addEventListener("mousedown",(e)=>{
+
+    document.querySelector(".move-area").addEventListener("touchstart",(e)=>{
+
+
+    if(e.target===handle) return;
+
+
+    if(
+        e.target.classList.contains("dial") ||
+        e.target.classList.contains("tick") ||
+        e.target.classList.contains("number") ||
+        e.target.classList.contains("hand")
+    ){
+        return;
+    }
+
+
+    if(e.target.tagName==="BUTTON"){
+        return;
+    }
+
+
+    moving=true;
+
+
+    const touch=e.touches[0];
+
+
+    moveStartX=touch.clientX-posX;
+
+    moveStartY=touch.clientY-posY;
+
+
+},{passive:false});
+
+
+
+document.addEventListener("touchmove",(e)=>{
+
+
+    if(!moving)return;
+
+
+    const touch=e.touches[0];
+
+
+    posX=touch.clientX-moveStartX;
+
+    posY=touch.clientY-moveStartY;
+
+
+    timer.style.transform=
+    `translate(${posX}px,${posY}px) scale(${startScale})`;
+
+
+},{passive:false});
+
+
+
+document.addEventListener("touchend",()=>{
+
+    moving=false;
+
+});
 
     // 크기 조절 점 제외
     if(e.target===resizeHandle) return;

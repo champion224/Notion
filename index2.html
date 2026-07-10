@@ -24,9 +24,11 @@ body{
     width:500px;
     height:700px;
 
-    transform:scale(0.65);
+    transform:translate(0px,0px) scale(0.65);
 
     transform-origin:center center;
+
+    cursor:grab;
 
 }
 
@@ -52,6 +54,7 @@ body{
     inset 0 0 30px rgba(0,0,0,.5);
 
 }
+
 
 
 /* 눈금 */
@@ -178,6 +181,7 @@ body{
 button{
 
     width:95px;
+
     height:42px;
 
     margin:6px;
@@ -217,7 +221,6 @@ button:hover{
     background:white;
 
     box-shadow:
-
     0 14px 28px rgba(0,0,0,0.18);
 
 }
@@ -229,14 +232,13 @@ button:active{
     transform:scale(0.95);
 
     box-shadow:
-
     0 5px 12px rgba(0,0,0,0.15);
 
 }
 
 
 
-/* 크기 조절 핸들 */
+/* 크기 조절 */
 
 .resize-handle{
 
@@ -259,6 +261,8 @@ button:active{
     z-index:100;
 
 }
+
+
 
 .start{
 
@@ -287,11 +291,13 @@ button:active{
 }
 
 
+
 .start:hover{
 
     background:#333;
 
 }
+
 
 
 .reset:hover{
@@ -300,119 +306,137 @@ button:active{
 
 }
 
-@media (prefers-color-scheme: dark){
-
-    body{
-        background:transparent;
-    }
 
 
-    .dial{
-
-        background:#111;
-
-        box-shadow:
-        inset 0 0 15px rgba(255,255,255,.1),
-        inset 0 0 30px rgba(0,0,0,.8);
-
-    }
 
 
-    .tick{
-
-        background:#fff;
-
-    }
+@media (prefers-color-scheme:dark){
 
 
-    .number{
+body{
 
-        color:#fff;
-
-    }
-
-
-    .time-display{
-
-        color:#fff;
-
-    }
-
-
-    .hand{
-
-        background:#111;
-
-    }
-
-
-    .handle{
-
-        background:#111;
-
-    }
-
-
-    button{
-
-        color:#fff;
-
-        background:rgba(255,255,255,0.12);
-
-        backdrop-filter:blur(15px);
-
-        box-shadow:
-        0 8px 20px rgba(0,0,0,.35);
-
-    }
-
-
-    button:hover{
-
-        background:rgba(255,255,255,0.22);
-
-    }
-
-
-    .start{
-
-        color:#111;
-
-        background:#fff;
-
-    }
-
-
-    .pause{
-
-        color:#fff;
-
-        background:rgba(255,255,255,.15);
-
-    }
-
-
-    .reset{
-
-        color:#fff;
-
-        background:#ef2348;
-
-    }
-
-
-    .resize-handle{
-
-        background:#fff;
-
-    }
+    background:transparent;
 
 }
+
+
+
+.dial{
+
+    background:#111;
+
+    box-shadow:
+    inset 0 0 15px rgba(255,255,255,.1),
+    inset 0 0 30px rgba(0,0,0,.8);
+
+}
+
+
+
+.tick{
+
+    background:#fff;
+
+}
+
+
+
+.number{
+
+    color:#fff;
+
+}
+
+
+
+.time-display{
+
+    color:#fff;
+
+}
+
+
+
+.hand{
+
+    background:#111;
+
+}
+
+
+
+.handle{
+
+    background:#111;
+
+}
+
+
+
+button{
+
+    color:#fff;
+
+    background:rgba(255,255,255,.12);
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,.35);
+
+}
+
+
+
+button:hover{
+
+    background:rgba(255,255,255,.22);
+
+}
+
+
+
+.start{
+
+    color:#111;
+
+    background:#fff;
+
+}
+
+
+
+.pause{
+
+    color:#fff;
+
+    background:rgba(255,255,255,.15);
+
+}
+
+
+
+.reset{
+
+    color:#fff;
+
+    background:#ef2348;
+
+}
+
+
+
+.resize-handle{
+
+    background:#fff;
+
+}
+
+
+}
+
 
 </style>
 
 </head>
-
 
 <body>
 
@@ -420,35 +444,35 @@ button:active{
 <div class="timer">
 
 
-    <div class="dial"></div>
+<div class="dial"></div>
 
-    <div class="hand"></div>
+<div class="hand"></div>
 
-    <div class="handle"></div>
-
-
-    <div class="time-display">
-        01:00:00
-    </div>
+<div class="handle"></div>
 
 
-    <div class="controls">
+<div class="time-display">
 
-        <button class="start" onclick="startTimer()">▶ 시작</button>
-
-        <button class="pause" onclick="pauseTimer()">⏸ 정지</button>
-
-        <button class="reset" onclick="resetTimer()">↻ 초기화</button>
-
-    </div>
-
-
-    <div class="resize-handle"></div>
-
+01:00:00
 
 </div>
 
 
+<div class="controls">
+
+<button class="start" onclick="startTimer()">▶ 시작</button>
+
+<button class="pause" onclick="pauseTimer()">⏸ 정지</button>
+
+<button class="reset" onclick="resetTimer()">↻ 초기화</button>
+
+</div>
+
+
+<div class="resize-handle"></div>
+
+
+</div>
 
 
 <script>
@@ -469,93 +493,65 @@ const center=250;
 
 
 
-/* 눈금 생성 */
-
 for(let i=0;i<60;i++){
 
 
-    const tick=document.createElement("div");
+const tick=document.createElement("div");
 
 
-    tick.className="tick";
+tick.className="tick";
 
 
-    tick.style.height=(i%5===0?18:10)+"px";
+tick.style.height=(i%5===0?18:10)+"px";
 
 
-    tick.style.width=(i%5===0?3:2)+"px";
+tick.style.width=(i%5===0?3:2)+"px";
 
 
-
-    tick.style.transform=
-
-    `translate(-50%,-50%)
-
-    rotate(${i*6}deg)
-
-    translateY(-180px)`;
+tick.style.transform=
+`translate(-50%,-50%) rotate(${i*6}deg) translateY(-180px)`;
 
 
-
-    timer.appendChild(tick);
+timer.appendChild(tick);
 
 
 }
 
 
 
-
-
-/* 숫자 생성 */
-
-
-const nums=[
-0,5,10,15,20,25,
-30,35,40,45,50,55
-];
-
+const nums=[0,5,10,15,20,25,30,35,40,45,50,55];
 
 
 nums.forEach((n,i)=>{
 
 
-    const angle=(i*30-90)*Math.PI/180;
+const angle=(i*30-90)*Math.PI/180;
 
 
-    const r=215;
+const r=215;
 
 
-
-    const div=document.createElement("div");
-
-
-    div.className="number";
+const div=document.createElement("div");
 
 
-    div.innerHTML=n;
+div.className="number";
 
 
-
-    div.style.left=
-
-    `${center+Math.cos(angle)*r}px`;
+div.innerHTML=n;
 
 
-
-    div.style.top=
-
-    `${center+Math.sin(angle)*r}px`;
+div.style.left=
+`${center+Math.cos(angle)*r}px`;
 
 
+div.style.top=
+`${center+Math.sin(angle)*r}px`;
 
-    timer.appendChild(div);
 
+timer.appendChild(div);
 
 
 });
-
-
-
 
 
 let selectedSeconds=3600;
@@ -565,46 +561,30 @@ let remainingSeconds=3600;
 let timerInterval=null;
 
 
-
-
-
 function updateDisplay(){
 
 
-
-    let h=Math.floor(remainingSeconds/3600);
-
-
-    let m=Math.floor((remainingSeconds%3600)/60);
+let h=Math.floor(remainingSeconds/3600);
 
 
-    let s=remainingSeconds%60;
+let m=Math.floor((remainingSeconds%3600)/60);
 
 
+let s=remainingSeconds%60;
 
-    timeDisplay.innerHTML=
 
-    `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+timeDisplay.innerHTML=
+`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
 
 
 }
 
-
-
-
-
-
-
 function setTimer(angle){
-
-
 
     angle=Math.max(0,Math.min(360,angle));
 
 
-
     dial.style.background=
-
 
     angle===360
 
@@ -617,18 +597,12 @@ function setTimer(angle){
     `conic-gradient(#ef2348 0deg ${angle}deg,white ${angle}deg 360deg)`;
 
 
-
-
-
     hand.style.transform=
 
     `translate(-50%,-100%) rotate(${angle}deg)`;
 
 
-
-
     const r=155;
-
 
 
     handle.style.left=
@@ -636,12 +610,9 @@ function setTimer(angle){
     `${center+Math.sin(angle*Math.PI/180)*r-7}px`;
 
 
-
     handle.style.top=
 
     `${center-Math.cos(angle*Math.PI/180)*r-7}px`;
-
-
 
 }
 
@@ -649,20 +620,15 @@ function setTimer(angle){
 
 
 
-
-
 function startTimer(){
 
-
     if(timerInterval)return;
-
 
 
     timerInterval=setInterval(()=>{
 
 
         if(remainingSeconds<=0){
-
 
             clearInterval(timerInterval);
 
@@ -673,9 +639,7 @@ function startTimer(){
         }
 
 
-
         remainingSeconds--;
-
 
 
         setTimer(remainingSeconds/10);
@@ -684,12 +648,9 @@ function startTimer(){
         updateDisplay();
 
 
-
     },1000);
 
-
 }
-
 
 
 
@@ -697,15 +658,11 @@ function startTimer(){
 
 function pauseTimer(){
 
-
     clearInterval(timerInterval);
-
 
     timerInterval=null;
 
-
 }
-
 
 
 
@@ -713,21 +670,16 @@ function pauseTimer(){
 
 function resetTimer(){
 
-
     pauseTimer();
-
 
 
     remainingSeconds=selectedSeconds;
 
 
-
     setTimer(360);
 
 
-
     updateDisplay();
-
 
 }
 
@@ -735,35 +687,26 @@ function resetTimer(){
 
 
 
+/* 손잡이 드래그 */
 
 let dragging=false;
 
 
-
 handle.addEventListener("mousedown",()=>{
-
 
     if(timerInterval)return;
 
-
     dragging=true;
 
-
 });
-
-
 
 
 
 document.addEventListener("mouseup",()=>{
 
-
     dragging=false;
 
-
 });
-
-
 
 
 
@@ -773,9 +716,7 @@ document.addEventListener("mousemove",(e)=>{
     if(!dragging)return;
 
 
-
     const rect=timer.getBoundingClientRect();
-
 
 
     const x=e.clientX-(rect.left+250*0.65);
@@ -783,17 +724,13 @@ document.addEventListener("mousemove",(e)=>{
     const y=e.clientY-(rect.top+250*0.65);
 
 
-
     let angle=Math.atan2(x,-y)*180/Math.PI;
-
 
 
     if(angle<0)angle+=360;
 
 
-
     angle=Math.round(angle/6)*6;
-
 
 
     selectedSeconds=angle*10;
@@ -802,12 +739,10 @@ document.addEventListener("mousemove",(e)=>{
     remainingSeconds=selectedSeconds;
 
 
-
     setTimer(angle);
 
 
     updateDisplay();
-
 
 
 });
@@ -818,8 +753,7 @@ document.addEventListener("mousemove",(e)=>{
 
 
 
-
-/* 크기 조절 기능 */
+/* 이동 + 크기 조절 */
 
 
 const resizeHandle=document.querySelector(".resize-handle");
@@ -827,10 +761,22 @@ const resizeHandle=document.querySelector(".resize-handle");
 
 let resizing=false;
 
+let moving=false;
+
+
 let startX=0;
 
 let startScale=0.65;
 
+
+let posX=0;
+
+let posY=0;
+
+
+let moveStartX=0;
+
+let moveStartY=0;
 
 
 
@@ -844,8 +790,37 @@ resizeHandle.addEventListener("mousedown",(e)=>{
     startX=e.clientX;
 
 
+    e.stopPropagation();
+
 
     e.preventDefault();
+
+
+});
+
+
+
+
+
+timer.addEventListener("mousedown",(e)=>{
+
+
+    if(e.target===resizeHandle) return;
+
+
+    if(e.target===handle) return;
+
+
+    moving=true;
+
+
+    moveStartX=e.clientX-posX;
+
+
+    moveStartY=e.clientY-posY;
+
+
+    timer.style.cursor="grabbing";
 
 
 });
@@ -858,22 +833,60 @@ resizeHandle.addEventListener("mousedown",(e)=>{
 document.addEventListener("mousemove",(e)=>{
 
 
-    if(!resizing)return;
+    /* 크기 변경 */
+
+
+    if(resizing){
+
+
+        let scale=startScale+(e.clientX-startX)/300;
+
+
+        scale=Math.max(0.3,Math.min(1.5,scale));
+
+
+        timer.style.transform=
+
+        `translate(${posX}px,${posY}px) scale(${scale})`;
+
+    }
 
 
 
-    let scale=startScale+(e.clientX-startX)/300;
+
+
+    /* 위치 이동 */
+
+
+    if(moving){
+
+
+        posX=e.clientX-moveStartX;
+
+
+        posY=e.clientY-moveStartY;
 
 
 
-    scale=Math.max(0.3,Math.min(1.5,scale));
+        let matrix=getComputedStyle(timer).transform;
+
+
+        let scale=0.65;
+
+
+        if(matrix!=="none"){
+
+            scale=parseFloat(matrix.split(",")[0].replace("matrix(",""));
+
+        }
 
 
 
-    timer.style.transform=
+        timer.style.transform=
 
-    `scale(${scale})`;
+        `translate(${posX}px,${posY}px) scale(${scale})`;
 
+    }
 
 
 });
@@ -889,9 +902,13 @@ document.addEventListener("mouseup",()=>{
     resizing=false;
 
 
+    moving=false;
+
+
+    timer.style.cursor="grab";
+
+
 });
-
-
 
 
 
@@ -907,4 +924,5 @@ updateDisplay();
 
 
 </body>
+
 </html>

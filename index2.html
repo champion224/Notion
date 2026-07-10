@@ -300,14 +300,10 @@ button:active{
 
 }
 
-/* =========================
-   다크모드 자동 대응
-========================= */
-
 @media (prefers-color-scheme: dark){
 
     body{
-        background:#111;
+        background:transparent;
     }
 
 
@@ -357,27 +353,25 @@ button:active{
     }
 
 
-
     button{
 
         color:#fff;
 
-        background:rgba(30,30,30,.75);
+        background:rgba(255,255,255,0.12);
+
+        backdrop-filter:blur(15px);
 
         box-shadow:
-
-        0 8px 20px rgba(0,0,0,.5);
+        0 8px 20px rgba(0,0,0,.35);
 
     }
-
 
 
     button:hover{
 
-        background:#222;
+        background:rgba(255,255,255,0.22);
 
     }
-
 
 
     .start{
@@ -389,33 +383,22 @@ button:active{
     }
 
 
-
-    .start:hover{
-
-        background:#ddd;
-
-    }
-
-
-
     .pause{
 
         color:#fff;
 
-        background:#222;
+        background:rgba(255,255,255,.15);
 
     }
-
 
 
     .reset{
 
-        color:#111;
+        color:#fff;
 
-        background:#ff365b;
+        background:#ef2348;
 
     }
-
 
 
     .resize-handle{

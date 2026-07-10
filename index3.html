@@ -31,13 +31,16 @@ body{
     "Apple SD Gothic Neo",
     sans-serif;
 
-
-    zoom:0.8;
+    zoom:0.9;
 
 }
 
 
-/* 계산기 카드 */
+
+/* =====================
+   Glass Card
+===================== */
+
 
 .calculator{
 
@@ -45,33 +48,57 @@ body{
 
     padding:26px;
 
-    border-radius:38px;
 
-    background:#ffffff;
+    border-radius:34px;
 
-    border:1px solid #e5e5e5;
+
+    background:
+
+    rgba(255,255,255,.7);
+
+
+    backdrop-filter:
+
+    blur(18px);
+
+
+    -webkit-backdrop-filter:
+
+    blur(18px);
+
+
+
+    border:
+
+    1px solid #dedede;
+
+
 
     box-shadow:
-    0 20px 50px rgba(0,0,0,0.06),
-    inset 0 0 0 1px rgba(255,255,255,0.8);
 
+    0 8px 25px rgba(0,0,0,.04);
 
-    /* 크기 조절 */
-    transform:scale(0.7);
+    /* 크기 조절 */ transform:scale(0.8);
 
 }
 
-/* 기록 */
+
+
+
+/* 계산 기록 */
 
 .history{
 
-    height:25px;
+    height:22px;
 
     text-align:right;
 
-    color:#b0b0b0;
 
-    font-size:14px;
+    color:#bcbcbc;
+
+
+    font-size:12px;
+
 
     letter-spacing:.5px;
 
@@ -79,31 +106,45 @@ body{
 
 
 
+
+
 /* 숫자 표시 */
 
 .display{
 
-    height:90px;
+
+    height:92px;
+
 
     display:flex;
-    align-items:center;
+
     justify-content:flex-end;
+
+    align-items:center;
+
 
 
     font-family:
+
     "SF Pro Display",
     "Helvetica Neue",
     Arial,
     sans-serif;
 
 
-    font-size:56px;
 
-    font-weight:500;
+    font-size:50px;
+
+
+    font-weight:450;
+
 
     letter-spacing:-2px;
 
-    color:#111;
+
+
+    color:#222;
+
 
 
     overflow:hidden;
@@ -112,112 +153,195 @@ body{
 
 
 
+
+
 /* 버튼 영역 */
 
 .buttons{
 
+
     display:grid;
+
 
     grid-template-columns:repeat(4,1fr);
 
-    gap:13px;
+
+    gap:12px;
+
 
 }
 
 
 
+
+
+/* 버튼 */
+
+
 button{
+
 
     height:50px;
 
+
     border:none;
 
-    border-radius:16px;
+
+    border-radius:17px;
 
 
-    background:#f7f7f7;
+
+    background:rgba(245,245,245,.85);
 
 
-    color:#222;
+
+    color:#333;
 
 
-    font-size:18px;
+
+    font-size:24px;
+
+
 
     font-weight:400;
+
 
 
     cursor:pointer;
 
 
-    transition:.15s;
+
+    transition:
+
+    transform .18s ease,
+
+    background .18s ease,
+
+    box-shadow .18s ease;
+
+
+
+    box-shadow:
+
+
+    0 2px 6px rgba(0,0,0,.05);
+
 
 }
+
 
 
 
 button:hover{
 
-    background:#eeeeee;
+
+    transform:translateY(-2px);
+
+
+
+    background:#ffffff;
+
+
+
+    box-shadow:
+
+
+    0 5px 12px rgba(0,0,0,.08);
+
 
 }
+
+
+
 
 
 button:active{
 
-    transform:scale(.92);
+
+    transform:scale(.94);
+
+
+
+    box-shadow:none;
+
 
 }
+
 
 
 
 
 /* 연산 버튼 */
 
+
 .operator{
 
 
-    background:#222222;
+    background:#d6a64a;
+
+
 
     color:white;
 
 
+
+    box-shadow:
+
+
+    0 3px 8px rgba(255, 171, 14, 0.25);
+
+
 }
+
 
 
 
 .operator:hover{
 
-    background:#333;
+
+    background:#c99739;
+
 
 }
+
+
 
 
 
 /* 초기화 */
 
+
 .clear{
 
-    background:#eaeaea;
 
-    color:#555;
+    background:#e5e5e5;
+
+
+    color:#666;
+
 
 }
+
 
 
 
 
 /* 0 버튼 */
 
+
 .zero{
+
 
     grid-column:span 2;
 
+
     text-align:left;
 
-    padding-left:25px;
+
+    padding-left:24px;
+
 
 }
-
 
 
 
@@ -246,27 +370,43 @@ button:active{
 
 
 <button class="clear" onclick="clearAll()">AC</button>
+
 <button onclick="append('(')">(</button>
+
 <button onclick="append(')')">)</button>
+
 <button class="operator" onclick="append('/')">÷</button>
 
 
+
 <button onclick="append('7')">7</button>
+
 <button onclick="append('8')">8</button>
+
 <button onclick="append('9')">9</button>
+
 <button class="operator" onclick="append('*')">×</button>
 
 
+
 <button onclick="append('4')">4</button>
+
 <button onclick="append('5')">5</button>
+
 <button onclick="append('6')">6</button>
+
 <button class="operator" onclick="append('-')">−</button>
 
 
+
 <button onclick="append('1')">1</button>
+
 <button onclick="append('2')">2</button>
+
 <button onclick="append('3')">3</button>
+
 <button class="operator" onclick="append('+')">+</button>
+
 
 
 <button class="zero" onclick="append('0')">
@@ -297,28 +437,39 @@ let expression="";
 
 
 const display=document.getElementById("display");
+
 const history=document.getElementById("history");
 
 
 
 function append(value){
 
+
     expression += value;
+
 
     display.innerText=formatNumber(expression);
 
+
 }
+
+
 
 
 function clearAll(){
 
+
     expression="";
+
 
     display.innerText="0";
 
+
     history.innerText="";
 
+
 }
+
 
 
 
@@ -328,21 +479,22 @@ function calculate(){
 try{
 
 
-let result=Function(
-"return "+expression
-)();
+    let result=Function(
+        "return "+expression
+    )();
 
 
 
-history.innerText=
-expression;
+    history.innerText=expression;
 
 
 
-expression=result;
+    expression=result;
 
 
-display.innerText=result;
+
+    display.innerText=formatNumber(result);
+
 
 
 }
@@ -350,62 +502,80 @@ display.innerText=result;
 catch{
 
 
-display.innerText="Error";
+    display.innerText="Error";
 
-expression="";
+
+    expression="";
+
+
+}
 
 
 }
 
 
 
+
+function formatNumber(value){
+
+
+    if(value==="")
+
+        return "0";
+
+
+
+    if(/[+\-*/().]/.test(value))
+
+        return value;
+
+
+
+    let num=Number(value);
+
+
+
+    if(isNaN(num))
+
+        return value;
+
+
+
+    return num.toLocaleString("ko-KR");
+
+
 }
+
+
 
 
 
 document.addEventListener("keydown",e=>{
 
 
-if(
-(e.key>="0"&&e.key<="9")
-|| "+-*/().".includes(e.key)
-){
+    if(
+    (e.key>="0"&&e.key<="9")
+    || "+-*/().".includes(e.key)
+    ){
 
-append(e.key);
+        append(e.key);
 
-}
-
-
-if(e.key==="Enter")
-calculate();
+    }
 
 
+    if(e.key==="Enter")
 
-if(e.key==="Escape")
-clearAll();
+        calculate();
 
+
+
+    if(e.key==="Escape")
+
+        clearAll();
 
 
 });
 
-function formatNumber(value){
-
-    if(value === "") return "0";
-
-    // 계산식(+, -, *, / 등)이 있으면 그대로 표시
-    if(/[+\-*/().]/.test(value)){
-        return value;
-    }
-
-    let num = Number(value);
-
-    if(isNaN(num)){
-        return value;
-    }
-
-    return num.toLocaleString("ko-KR");
-
-}
 
 </script>
 

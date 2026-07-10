@@ -10,50 +10,49 @@
 .schedule{
     border-collapse:collapse;
     table-layout:fixed;
-    width:520px;          /* 전체 가로폭 */
+    width:380px;
     font-family:Arial,sans-serif;
-    font-size:7px;
+    font-size:6px;
     margin:auto;
 }
 
 .schedule caption{
-    font-size:11px;
+    font-size:9px;
     font-weight:bold;
-    padding:3px;
+    padding:2px;
     text-align:left;
 }
 
 .schedule th{
-    padding:2px;
-    height:18px;
+    width:56px;
+    padding:1px;
+    height:14px;
     background:#f1f5f9;
     border:1px solid #e2e8f0;
-    font-size:7px;
+    font-size:6px;
     font-weight:bold;
 }
 
 .schedule td{
-    padding:2px;
-    height:16px;
+    padding:1px;
+    height:12px;
     border:1px solid #e2e8f0;
-    font-size:7px;
-    line-height:1.1;
+    font-size:6px;
+    line-height:1.0;
     vertical-align:top;
 }
 
-/* 시간 열 */
 .schedule th:first-child,
 .schedule td:first-child{
-    width:42px;
+    width:28px;
     background:#f8fafc;
     text-align:center;
     font-weight:bold;
 }
 
-/* 월~금 열 */
 .schedule th:not(:first-child),
 .schedule td:not(:first-child){
-    width:90px;
+    width:56px;
     word-break:break-word;
     overflow-wrap:break-word;
 }
@@ -64,42 +63,42 @@
     background:#bceeff;
     color:#000;
     font-weight:bold;
-    border-radius:3px;
 }
 
 .class-sky{
     background:#9abae4;
     color:#1e3a8a;
     font-weight:bold;
-    border-radius:3px;
 }
 
 .class-purple{
     background:#e9d5ff;
     color:#6b21a8;
     font-weight:bold;
-    border-radius:3px;
 }
 
 .class-green{
     background:#dcfce7;
     color:#166534;
     font-weight:bold;
-    border-radius:3px;
 }
 
 .class-red{
     background:#fee2e2;
     color:#991b1b;
     font-weight:bold;
-    border-radius:3px;
 }
 
 .class-sky2{
     background:#c1d2e9;
     color:#1e3a8a;
     font-weight:bold;
-    border-radius:3px;
+}
+.wrapper{
+    width:540px;
+    transform:scale(0.7);
+    transform-origin:top left;
+    overflow:hidden;
 }
 </style>
 
@@ -108,8 +107,8 @@
 
 <body>
 
-
-<table class="schedule">
+<div class="wrapper">
+  <table class="schedule">
 
 <caption>My Weekly Schedule</caption>
 
@@ -406,8 +405,8 @@ Tut1<br>
 
 </tbody>
 
-</table>
-
+  </table>
+</div>
 
 </body>
 </html>

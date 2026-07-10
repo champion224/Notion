@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Weekly Schedule</title>
+
+<style>
+.schedule{
+    border-collapse:collapse;
+    table-layout:fixed;
+    width:520px;          /* 전체 가로폭 */
+    font-family:Arial,sans-serif;
+    font-size:7px;
+    margin:auto;
+}
+
+.schedule caption{
+    font-size:11px;
+    font-weight:bold;
+    padding:3px;
+    text-align:left;
+}
+
+.schedule th{
+    padding:2px;
+    height:18px;
+    background:#f1f5f9;
+    border:1px solid #e2e8f0;
+    font-size:7px;
+    font-weight:bold;
+}
+
+.schedule td{
+    padding:2px;
+    height:16px;
+    border:1px solid #e2e8f0;
+    font-size:7px;
+    line-height:1.1;
+    vertical-align:top;
+}
+
+/* 시간 열 */
+.schedule th:first-child,
+.schedule td:first-child{
+    width:42px;
+    background:#f8fafc;
+    text-align:center;
+    font-weight:bold;
+}
+
+/* 월~금 열 */
+.schedule th:not(:first-child),
+.schedule td:not(:first-child){
+    width:90px;
+    word-break:break-word;
+    overflow-wrap:break-word;
+}
+
+/* 색상 */
+
+.class-blue{
+    background:#bceeff;
+    color:#000;
+    font-weight:bold;
+    border-radius:3px;
+}
+
+.class-sky{
+    background:#9abae4;
+    color:#1e3a8a;
+    font-weight:bold;
+    border-radius:3px;
+}
+
+.class-purple{
+    background:#e9d5ff;
+    color:#6b21a8;
+    font-weight:bold;
+    border-radius:3px;
+}
+
+.class-green{
+    background:#dcfce7;
+    color:#166534;
+    font-weight:bold;
+    border-radius:3px;
+}
+
+.class-red{
+    background:#fee2e2;
+    color:#991b1b;
+    font-weight:bold;
+    border-radius:3px;
+}
+
+.class-sky2{
+    background:#c1d2e9;
+    color:#1e3a8a;
+    font-weight:bold;
+    border-radius:3px;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<table class="schedule">
+
+<caption>My Weekly Schedule</caption>
+
+<thead>
+<tr>
+<th>Time</th>
+<th>Monday</th>
+<th>Tuesday</th>
+<th>Wednesday</th>
+<th>Thursday</th>
+<th>Friday</th>
+</tr>
+</thead>
+
+
+<tbody>
+
+<tr>
+<td>08:00</td>
+<td></td><td></td><td></td><td></td><td></td>
+</tr>
+
+<tr>
+<td>08:30</td>
+<td></td><td></td><td></td><td></td><td></td>
+</tr>
+
+
+<tr>
+
+<td>09:00</td>
+
+<td class="class-blue" rowspan="2">
+Online059<br>
+27/7-14/9, 28/9-19/10<br>
+32555_SPR_U_1_S<br>
+Fundamentals of Software Development...
+</td>
+
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+
+</tr>
+
+
+<tr>
+<td>09:30</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+
+<tr>
+
+<td>10:00</td>
+
+<td></td>
+
+<td></td>
+
+<td class="class-red" rowspan="4">
+Room shown 2 wks before session<br>
+29/7-16/9, 30/9-21/10<br>
+32555_SPR_U1_S<br>
+Fundamentals of Software Development<br>
+Cam1<br>
+07
+</td>
+
+<td></td>
+<td></td>
+
+</tr>
+
+
+<tr>
+<td>10:30</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+
+<td>11:00</td>
+
+<td></td>
+
+<td class="class-sky" rowspan="2">
+Online058<br>
+28/7-15/9,29/9-20/10<br>
+42017_SPR_U_1_S<br>
+Fundamentals of Interaction Design..
+</td>
+
+<td></td>
+<td></td>
+
+</tr>
+
+
+<tr>
+<td>11:30</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+
+<tr>
+<td>12:00</td>
+<td></td><td></td><td></td><td></td><td></td>
+</tr>
+
+<tr>
+<td>12:30</td>
+<td></td><td></td><td></td><td></td><td></td>
+</tr>
+
+
+<tr>
+<td>13:00</td>
+<td></td><td></td><td></td><td></td><td></td>
+</tr>
+
+<tr>
+<td>13:30</td>
+<td></td><td></td><td></td><td></td><td></td>
+</tr>
+
+
+
+<tr>
+
+<td>14:00</td>
+
+<td></td>
+
+<td class="class-purple" rowspan="4">
+Online058<br>
+28/7-25/8, 8/9, 29/9, 13/10<br>
+32405_SPR_U_1_S<br>
+Human-Centred Design Research Methods<br>
+Wrk1 01
+</td>
+
+
+<td></td>
+
+
+<td class="class-sky2" rowspan="4">
+Room shown 2 wks<br>
+before session<br>
+30/7-17/9, 1/10-22/10<br>
+95563_SPR_U_1_S<br>
+Data Driven Storytelling Studio<br>
+Stu1<br>
+02
+</td>
+
+
+<td></td>
+
+</tr>
+
+
+
+<tr>
+<td>14:30</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td>15:00</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td>15:30</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+
+<tr>
+<td>16:00</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+
+<tr>
+
+<td>16:30</td>
+
+<td></td>
+
+
+<td class="class-green" rowspan="3">
+Room shown 2 wks before session<br>
+28/7-15/9,29/9-20/10<br>
+42017_SPR_U_1_S<br>
+Fundamentals of Interaction Design<br>
+Tul1<br>
+02
+</td>
+
+
+<td></td>
+
+
+<td></td>
+
+
+<td class="class-green" rowspan="4">
+Room shown 2 wks before session<br>
+7/8-18/9,2/10-23/10<br>
+32405_SPR_U_1_S<br>
+Human-Centred Design Research Methods<br>
+Tut1<br>
+01
+</td>
+
+
+</tr>
+
+
+
+<tr>
+<td>17:00</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td>17:30</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td>18:00</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+
+<tr>
+<td>18:30</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+
+<tr>
+<td>19:00</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+</tbody>
+
+</table>
+
+
+</body>
+</html>
